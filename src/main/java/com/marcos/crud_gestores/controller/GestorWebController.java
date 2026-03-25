@@ -43,14 +43,20 @@ public class GestorWebController {
     }
     @PostMapping("/gestores/atualizar/{id}")
     public String atualizar(@PathVariable Long id, Gestor gestor) {
+        System.out.println("Tentando atualizar ID: " + id);
+        System.out.println("Nome recebido: " + gestor.getNome());
+        System.out.println("Email recebido: " + gestor.getEmail());
+
         Gestor existente = service.buscarPorId(id);
 
         if (existente == null) {
-        return "redirect:/gestores";
-        }
+            System.out.println("Gestor não encontrado no banco");
+            return "redirect:/gestores";
+    }
 
-        service.atualizar(id, gestor);
-        return "redirect:/gestores";
+    service.atualizar(id, gestor);
+    System.out.println("Gestor atualizado com sucesso");
+    return "redirect:/gestores";
     }
 }
 
