@@ -43,8 +43,15 @@ public class GestorWebController {
     }
     @PostMapping("/gestores/atualizar/{id}")
     public String atualizar(@PathVariable Long id, Gestor gestor) {
+        Gestor existente = service.buscarPorId(id);
+
+        if (existente == null) {
+        return "redirect:/gestores";
+        }
+
         service.atualizar(id, gestor);
         return "redirect:/gestores";
     }
 }
+
 

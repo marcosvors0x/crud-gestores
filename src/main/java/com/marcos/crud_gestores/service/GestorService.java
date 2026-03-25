@@ -24,16 +24,21 @@ public class GestorService {
     public void deletar(Long id) {
         repository.deleteById(id);
     }
+
     public Gestor atualizar(Long id, Gestor gestorAtualizado) {
-    Gestor gestor = repository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Gestor não encontrado"));
+        Gestor gestor = repository.findById(id).orElse(null);
 
-    gestor.setNome(gestorAtualizado.getNome());
-    gestor.setEmail(gestorAtualizado.getEmail());
+        if (gestor == null) {
+            return null;
+        }
 
-    return repository.save(gestor);
+        gestor.setNome(gestorAtualizado.getNome());
+        gestor.setEmail(gestorAtualizado.getEmail());
+
+        return repository.save(gestor);
     }
+
     public Gestor buscarPorId(Long id) {
-    return repository.findById(id).orElse(null);      
+        return repository.findById(id).orElse(null);
     }
 }
