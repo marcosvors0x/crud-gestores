@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestores</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h1>Lista de Gestores</h1>
+
+<form action="/gestores" method="post">
+    Nome: <input type="text" name="nome" />
+    Email: <input type="text" name="email" />
+    <button type="submit">Salvar</button>
+</form>
+
+<br>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Ação</th>
+    </tr>
+
+    <tr th:each="gestor : ${gestores}">
+        <td th:text="${gestor.id}"></td>
+        <td th:text="${gestor.nome}"></td>
+        <td th:text="${gestor.email}"></td>
+        <td>
+            <a th:href="@{/editar/{id}(id=${gestor.id})}">Editar</a> |
+            <a th:href="@{/gestores/deletar/{id}(id=${gestor.id})}">Deletar</a>            
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
