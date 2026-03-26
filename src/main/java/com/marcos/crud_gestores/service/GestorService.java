@@ -26,16 +26,16 @@ public class GestorService {
     }
 
     public Gestor atualizar(Long id, Gestor gestorAtualizado) {
-        Gestor gestor = repository.findById(id).orElse(null);
+        Gestor gestorExistente = repository.findById(id).orElse(null);
 
-        if (gestor == null) {
-            return null;
+        if (gestorExistente == null) {
+        return null;
         }
 
-        gestor.setNome(gestorAtualizado.getNome());
-        gestor.setEmail(gestorAtualizado.getEmail());
+        gestorExistente.setNome(gestorAtualizado.getNome());
+        gestorExistente.setEmail(gestorAtualizado.getEmail());
 
-        return repository.save(gestor);
+        return repository.save(gestorExistente);
     }
 
     public Gestor buscarPorId(Long id) {
